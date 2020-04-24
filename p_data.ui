@@ -37,6 +37,23 @@
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QPushButton" name="add">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{background-image: url(:/new/prefix1/pic/icon-添加-默认.png);background-color:rgb(233, 233, 233);background-repeat: no-repeat;background-position:left;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}
+QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-添加-悬停点击.png);background-color:rgb(107, 142, 235);background-repeat: no-repeat;background-position:left;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}
+ QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-添加-悬停点击.png);background-color:rgb(65, 95, 196);background-repeat: no-repeat;background-position:left;border:none;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}</string>
+          </property>
           <property name="text">
            <string>add</string>
           </property>
@@ -44,6 +61,23 @@
         </item>
         <item>
          <widget class="QPushButton" name="del">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{background-image: url(:/new/prefix1/pic/icon-删除-默认.png);background-color:rgb(233, 233, 233);background-repeat: no-repeat;background-position:left;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}
+QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-删除-悬停点击.png);background-color:rgb(107, 142, 235);background-repeat: no-repeat;background-position:left;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}
+QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-删除-悬停点击.png);background-color:rgb(65, 95, 196);background-repeat: no-repeat;background-position:left;border:none;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}</string>
+          </property>
           <property name="text">
            <string>del</string>
           </property>
@@ -51,6 +85,23 @@
         </item>
         <item>
          <widget class="QPushButton" name="clean">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{background-image: url(:/new/prefix1/pic/icon-清空-默认.png);background-color:rgb(233, 233, 233);background-repeat: no-repeat;background-position:left;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}
+QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-清空-悬停点击.png);background-color:rgb(107, 142, 235);background-repeat: no-repeat;background-position:left;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}
+QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-清空-悬停点击.png);background-color:rgb(65, 95, 196);background-repeat: no-repeat;background-position:left;border:none;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}</string>
+          </property>
           <property name="text">
            <string>clean</string>
           </property>
@@ -58,6 +109,23 @@
         </item>
         <item>
          <widget class="QPushButton" name="mkdir">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{background-image: url(:/new/prefix1/pic/icon-新建文件-默认.png);background-color:rgb(233, 233, 233);background-repeat: no-repeat;background-position:left;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}
+QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-新建文件-悬停点击.png);background-color:rgb(107, 142, 235);background-repeat: no-repeat;background-position:left;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}
+QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-新建文件-悬停点击.png);background-color:rgb(65, 95, 196);background-repeat: no-repeat;background-position:left;border:none;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}</string>
+          </property>
           <property name="text">
            <string>mkdir</string>
           </property>
@@ -104,12 +172,6 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
           <property name="baseSize">
            <size>
             <width>0</width>
@@ -135,6 +197,23 @@
        </item>
        <item row="1" column="2">
         <widget class="QPushButton" name="burner_setting">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{background-color:rgb(233, 233, 233);font: 14px;border-radius: 4px;}
+QPushButton:hover{background-color:rgb(107, 142, 235);font: 14px;border-radius: 4px;}
+QPushButton:pressed{border:none;background-color:rgb(65, 95, 196);font: 14px;border-radius: 4px;}</string>
+         </property>
          <property name="text">
           <string>burner setting</string>
          </property>
@@ -144,28 +223,95 @@
         <layout class="QGridLayout" name="gridLayout">
          <item row="0" column="0">
           <widget class="QLabel" name="label_2">
+           <property name="minimumSize">
+            <size>
+             <width>75</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>75</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text">
             <string>当前刻录机</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QComboBox" name="comboBox"/>
+          <widget class="QComboBox" name="comboBox">
+           <property name="minimumSize">
+            <size>
+             <width>310</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>310</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_3">
+           <property name="minimumSize">
+            <size>
+             <width>75</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>75</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text">
             <string>光盘型号</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QComboBox" name="comboBox_2"/>
+          <widget class="QComboBox" name="comboBox_2">
+           <property name="minimumSize">
+            <size>
+             <width>310</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>310</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
        <item row="1" column="3">
         <widget class="QPushButton" name="start_burner">
+         <property name="minimumSize">
+          <size>
+           <width>140</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>140</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{background-color:rgb(61, 107, 229);font: 14px;border-radius: 4px;color: rgb(255,255,255);}
+QPushButton:hover{background-color:rgb(107, 142, 235);font: 14px;border-radius: 4px;color: rgb(255,255,255);}
+QPushButton:pressed{border:none;background-color:rgb(65, 95, 196);font: 14px;border-radius: 4px;color: rgb(255,255,255);}</string>
+         </property>
          <property name="text">
           <string>start burner</string>
          </property>

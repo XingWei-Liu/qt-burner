@@ -21,7 +21,7 @@ public:
     explicit p_copy(QWidget *parent = nullptr);
     ~p_copy();
     void create_ui();
-private slots:
+//private slots:
 
     void on_file_clicked();
 

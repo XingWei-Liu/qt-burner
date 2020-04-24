@@ -23,21 +23,15 @@ public:
 
     void create_ui();
 
-private slots:
-    void on_add_clicked();
+Q_SLOT  void on_add_clicked();
+Q_SLOT  void on_mkdir_clicked();
+Q_SLOT  void on_del_clicked();
+Q_SLOT  void on_clean_clicked();
+Q_SLOT  void on_burner_setting_clicked();
+Q_SLOT  void on_start_burner_clicked();
+Q_SLOT  void setting_exit();
+Q_SLOT  void setting_ok();
 
-    void on_mkdir_clicked();
-
-    void on_del_clicked();
-
-    void on_clean_clicked();
-
-    void on_burner_setting_clicked();
-
-    void on_start_burner_clicked();
-
-    void setting_exit();
-    void setting_ok();
 private:
     Ui::p_data *ui;
     class property pro;

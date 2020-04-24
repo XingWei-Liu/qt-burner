@@ -24,7 +24,7 @@ public:
 
     void create_ui();
 
-private slots:
+//private slots:
 
     void on_data_burner_clicked();
 

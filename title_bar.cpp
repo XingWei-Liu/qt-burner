@@ -25,8 +25,6 @@ TitleBar::TitleBar(QWidget *parent)
     m_pMaximizeButton = new QPushButton(this);
     m_pCloseButton = new QPushButton(this);
 
-//    m_pIconLabel->setFixedSize(20, 20);
-//    m_pIconLabel->setScaledContents(true);
     m_pIconLabel->setFixedSize(35,35);
     m_pIconLabel->setStyleSheet("QLabel{background-image: url(:/new/prefix1/pic/logo.png);background-color:rgb(255,255,255);background-repeat: no-repeat;}");
 
@@ -70,14 +68,14 @@ TitleBar::TitleBar(QWidget *parent)
 
     QMenu *menu = new QMenu(this);  //新建菜单
 
-    menu->addAction(QIcon(""),"popup",this,SLOT(popup()));
-    menu->addAction(QIcon(""),"clean",this,SLOT(clean()));
+    menu->addAction(QIcon(""),"popup",this,&TitleBar::popup);
+    menu->addAction(QIcon(""),"clean",this,&TitleBar::clean);
     menu->addSeparator();
-    menu->addAction(QIcon(""),"MD5",this,SLOT(md5()));
-    menu->addAction(QIcon(""),"filter",this, SLOT(filter()));
+    menu->addAction(QIcon(""),"MD5",this,&TitleBar::md5);
+    menu->addAction(QIcon(""),"filter",this, &TitleBar::filter);
     menu->addSeparator();
-    menu->addAction(QIcon(""),"help",this,SLOT(help()));
-    menu->addAction(QIcon(""),"about",this,SLOT(about()));
+    menu->addAction(QIcon(""),"help",this,&TitleBar::help);
+    menu->addAction(QIcon(""),"about",this,&TitleBar::about);
 
     menu->setStyleSheet("QMenu:hover{background-color:rgb(248, 100, 87);}");
 
@@ -103,10 +101,10 @@ TitleBar::TitleBar(QWidget *parent)
     pLayout->addWidget(m_pMaximizeButton);
     pLayout->addWidget(m_pCloseButton);
 
-    connect(m_pMenubutton, SIGNAL(clicked(bool)), this, SLOT(onClicked()));
-    connect(m_pMinimizeButton, SIGNAL(clicked(bool)), this, SLOT(onClicked()));
-    connect(m_pMaximizeButton, SIGNAL(clicked(bool)), this, SLOT(onClicked()));
-    connect(m_pCloseButton, SIGNAL(clicked(bool)), this, SLOT(onClicked()));
+    connect(m_pMenubutton, &QPushButton::clicked, this, &TitleBar::onClicked);
+    connect(m_pMinimizeButton, &QPushButton::clicked, this, &TitleBar::onClicked);
+    connect(m_pMaximizeButton, &QPushButton::clicked, this, &TitleBar::onClicked);
+    connect(m_pCloseButton, &QPushButton::clicked, this, &TitleBar::onClicked);
 }
 
 TitleBar::~TitleBar()
@@ -119,7 +117,7 @@ void TitleBar::mouseDoubleClickEvent(QMouseEvent *event)
 {
     Q_UNUSED(event);
 
-    emit m_pMaximizeButton->clicked();
+//    emit m_pMaximizeButton->clicked();
 }
 
 void TitleBar::mouseMoveEvent(QMouseEvent *event)
@@ -246,7 +244,8 @@ void TitleBar::clean()
     close->setStyleSheet("QPushButton{border-image: url(:/new/prefix1/pic/icon-关闭-默认.png);border:none;background-color:rgb(233, 233, 233);border-radius: 4px;}"
                                 "QPushButton:hover{border-image: url(:/new/prefix1/pic/icon-关闭-悬停点击.png);border:none;background-color:rgb(248, 100, 87);border-radius: 4px;}");
 
-    connect(close, SIGNAL(clicked(bool)), this, SLOT(clean_exit()));
+    connect(close, &QPushButton::clicked, this, &TitleBar::clean_exit);
+
     QHBoxLayout *titlebar = new QHBoxLayout();
     titlebar->addWidget(icon);
     titlebar->addSpacing(10);
@@ -277,8 +276,8 @@ void TitleBar::clean()
     mainWidgetLayout->addStretch();
     mainWidgetLayout->addLayout(hLayout);
 
-    connect(ok, SIGNAL(clicked(bool)), this, SLOT(clean_ok()));
-    connect(cancel, SIGNAL(clicked(bool)), this, SLOT(clean_exit()));
+   connect(close, &QPushButton::clicked, this, &TitleBar::clean_exit);
+
     clean_dialog->setModal(true);
     clean_dialog->show();
 }
@@ -298,8 +297,8 @@ void TitleBar::md5()
     close->setFixedSize(30,30);
     close->setStyleSheet("QPushButton{border-image: url(:/new/prefix1/pic/icon-关闭-默认.png);border:none;background-color:rgb(233, 233, 233);border-radius: 4px;}"
                                 "QPushButton:hover{border-image: url(:/new/prefix1/pic/icon-关闭-悬停点击.png);border:none;background-color:rgb(248, 100, 87);border-radius: 4px;}");
+    connect(close, &QPushButton::clicked, this, &TitleBar::check_exit);
 
-    connect(close, SIGNAL(clicked(bool)), this, SLOT(check_exit()));
     QHBoxLayout *titlebar = new QHBoxLayout();
     titlebar->addWidget(icon);
     titlebar->addSpacing(10);
@@ -336,8 +335,9 @@ void TitleBar::md5()
     mainWidgetLayout->addStretch();
     mainWidgetLayout->addLayout(hLayout);
 
-    connect(ok, SIGNAL(clicked(bool)), this, SLOT(check_ok()));
-    connect(cancel, SIGNAL(clicked(bool)), this, SLOT(check_exit()));
+    connect(ok, &QPushButton::clicked, this, &TitleBar::check_ok);
+    connect(cancel, &QPushButton::clicked, this, &TitleBar::check_exit);
+
     check_dialog->setModal(true);
     check_dialog->show();
 }
@@ -357,8 +357,7 @@ void TitleBar::filter()
     close->setFixedSize(30,30);
     close->setStyleSheet("QPushButton{border-image: url(:/new/prefix1/pic/icon-关闭-默认.png);border:none;background-color:rgb(233, 233, 233);border-radius: 4px;}"
                                 "QPushButton:hover{border-image: url(:/new/prefix1/pic/icon-关闭-悬停点击.png);border:none;background-color:rgb(248, 100, 87);border-radius: 4px;}");
-
-    connect(close, SIGNAL(clicked(bool)), this, SLOT(filter_exit()));
+    connect(close, &QPushButton::clicked, this, &TitleBar::filter_exit);
 
     QHBoxLayout *titlebar = new QHBoxLayout();
     titlebar->addWidget(icon);

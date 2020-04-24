@@ -8,6 +8,25 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+INCLUDEPATH +=/usr/include/burner3/
+INCLUDEPATH +=/usr/include/glib-2.0/
+INCLUDEPATH +=/usr/include/gtk-3.0/
+INCLUDEPATH +=/usr/include/pango-1.0/
+INCLUDEPATH +=/usr/include/cairo/
+INCLUDEPATH +=/usr/include/gdk-pixbuf-2.0/
+INCLUDEPATH +=/usr/include/atk-1.0/
+INCLUDEPATH +=/usr/include/gstreamer-1.0/
+INCLUDEPATH +=/usr/lib/x86_64-linux-gnu/glib-2.0/include
+
+LIBS +=-lgobject-2.0
+LIBS +=-lglib-2.0
+LIBS +=-pthread
+LIBS +=-lgthread-2.0
+
+LIBS +=$$PWD/so/libburner-burn3.so.1.2.0
+LIBS +=$$PWD/so/libburner-media3.so.1.2.0
+LIBS +=$$PWD/so/libburner-utils3.so.1.2.0
+
 TARGET = burner-test
 TEMPLATE = app
 
@@ -22,7 +41,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-CONFIG += c++11
+PKGCONFIG +=gtk+-3.0
+
+CONFIG += c++11 link_pkgconfig no_keywords
 
 SOURCES += \
         main.cpp \
@@ -31,7 +52,8 @@ SOURCES += \
     p_data.cpp \
     p_image.cpp \
     p_copy.cpp \
-    property.cpp
+    property.cpp \
+    kylin_api.c
 
 HEADERS += \
         widget.h \
@@ -39,7 +61,9 @@ HEADERS += \
     p_data.h \
     p_image.h \
     p_copy.h \
-    property.h
+    property.h \
+    so/config.h \
+    kylin_api.h
 
 FORMS += \
         widget.ui \
@@ -54,5 +78,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     res.qrc
+
+DISTFILES += \
+    so/libburner-burn3.so.1.2.0 \
+    so/libburner-media3.so.1.2.0 \
+    so/libburner-utils3.so.1.2.0
 
 

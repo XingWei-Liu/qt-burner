@@ -13,12 +13,53 @@
 #include "p_data.h"
 #include "ui_p_data.h"
 
+extern "C"{
+#include "kylin_api.h"
+}
+
 p_data::p_data(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::p_data)
 {
     ui->setupUi(this);
     create_ui();
+
+    KylinDeviceInfo info[KYLIN_MAXNUM_DEVICE] = {0}; //运行结束，记得free
+    int num = kylin_get_device_info(info);
+
+    bool mount_flag=false;
+    for(int i=0; i<num; i++)
+    {
+        printf("info[%d].drive_name :%s \n", i, info[i].drive_name);
+        printf("info[%d].mountpoint :%s \n\n", i, info[i].mountpoint);
+
+        if(info[i].drive_name)
+            ui->comboBox->addItem(info[i].drive_name);
+
+        if(info[i].mountpoint)
+        {
+            ui->comboBox_2->addItem(info[i].mountpoint);
+            mount_flag = true;
+        }
+    }
+    kylin_device_free(info, num); //释放内存
+
+    qDebug() << ui->comboBox_2->currentText();
+    qDebug() << "mount_flag :" << mount_flag;
+
+    if(mount_flag)
+        ui->treeView->setRootIndex(data_model->index(ui->comboBox_2->currentText()));
+    //else
+      //  ui->treeView->setRootIndex(data_model->index("/"));
+
+//    data_model->setRootPath(ui->comboBox_2->currentText());
+//    ui->treeView->setRootIndex(data_model->index(ui->comboBox_2->currentText()));
+//    data_model->setRootPath("/home");
+//        data_model->setRootPath(QDir::currentPath());
+//        data_model->setRootPath("/home/test");
+
+
+
 }
 
 p_data::~p_data()
@@ -30,54 +71,36 @@ void p_data::create_ui()
 {
     ui->textBrowser->setMaximumSize(30,30);
 
-    ui->add->setFixedSize(80,30);
-    ui->del->setFixedSize(80,30);
-    ui->clean->setFixedSize(80,30);
-    ui->mkdir->setFixedSize(80,30);
-    ui->add->setStyleSheet("QPushButton{background-image: url(:/new/prefix1/pic/icon-添加-默认.png);background-color:rgb(233, 233, 233);background-repeat: no-repeat;background-position:left;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}"
-                           "QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-添加-悬停点击.png);background-color:rgb(107, 142, 235);background-repeat: no-repeat;background-position:left;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}"
-                           "QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-添加-悬停点击.png);background-color:rgb(65, 95, 196);background-repeat: no-repeat;background-position:left;border:none;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}");
-
-    ui->del->setStyleSheet("QPushButton{background-image: url(:/new/prefix1/pic/icon-删除-默认.png);background-color:rgb(233, 233, 233);background-repeat: no-repeat;background-position:left;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}"
-                           "QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-删除-悬停点击.png);background-color:rgb(107, 142, 235);background-repeat: no-repeat;background-position:left;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}"
-                           "QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-删除-悬停点击.png);background-color:rgb(65, 95, 196);background-repeat: no-repeat;background-position:left;border:none;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}");
-    ui->clean->setStyleSheet("QPushButton{background-image: url(:/new/prefix1/pic/icon-清空-默认.png);background-color:rgb(233, 233, 233);background-repeat: no-repeat;background-position:left;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}"
-                           "QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-清空-悬停点击.png);background-color:rgb(107, 142, 235);background-repeat: no-repeat;background-position:left;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}"
-                           "QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-清空-悬停点击.png);background-color:rgb(65, 95, 196);background-repeat: no-repeat;background-position:left;border:none;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}");
-    ui->mkdir->setStyleSheet("QPushButton{background-image: url(:/new/prefix1/pic/icon-新建文件-默认.png);background-color:rgb(233, 233, 233);background-repeat: no-repeat;background-position:left;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}"
-                           "QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-新建文件-悬停点击.png);background-color:rgb(107, 142, 235);background-repeat: no-repeat;background-position:left;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}"
-                           "QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-新建文件-悬停点击.png);background-color:rgb(65, 95, 196);background-repeat: no-repeat;background-position:left;border:none;color:rgb(0, 0, 0);font: 14px;border-radius: 4px;}");
-
-    ui->label_2->setFixedSize(75,30);
-    ui->label_3->setFixedSize(75,30);
-    ui->comboBox->setFixedSize(310,30);
-    ui->comboBox_2->setFixedSize(310,30);
-    ui->burner_setting->setFixedSize(80,30);
-    ui->burner_setting->setStyleSheet("QPushButton{background-color:rgb(233, 233, 233);font: 14px;border-radius: 4px;}"
-                           "QPushButton:hover{background-color:rgb(107, 142, 235);font: 14px;border-radius: 4px;}"
-                           "QPushButton:pressed{border:none;background-color:rgb(65, 95, 196);font: 14px;border-radius: 4px;}");
-
-    ui->start_burner->setFixedSize(140,45);
-    ui->start_burner->setStyleSheet("QPushButton{background-color:rgb(61, 107, 229);font: 14px;border-radius: 4px;color: rgb(255,255,255);}"
-                           "QPushButton:hover{background-color:rgb(107, 142, 235);font: 14px;border-radius: 4px;color: rgb(255,255,255);}"
-                           "QPushButton:pressed{border:none;background-color:rgb(65, 95, 196);font: 14px;border-radius: 4px;color: rgb(255,255,255);}");
-
     data_model = new QFileSystemModel;
-    data_model->setRootPath(QDir::currentPath());
-//    data_model->setRootPath("/home/test");
-
-
     ui->treeView->setModel(data_model);
-    ui->treeView->setRootIndex(data_model->index("/home/test/"));
     ui->treeView->setColumnWidth(0,400);
 }
 
 void p_data::on_add_clicked()
 {
-    QString s = QFileDialog::getExistingDirectory(this, "open file dialog", "/home/test");
+    qDebug() << __FUNCTION__ << __LINE__ <<  "-------------------";
+
+    QString s = QFileDialog::getExistingDirectory(this, "open file dialog", "/home");
+
+
+    QStringList files = QFileDialog::getOpenFileNames(
+                            this,
+                            "Select one or more files to open",
+                            "/home",
+                            "ALL(*.*)");
+
+    for(int i=0;i<files.size();i++)
+         {
+//             ui->openEdits->append(filenames.at(i));
+
+//            ui->treeView->s
+         }
+
+//    ui->treeView->a
+
     qDebug() << "filenames: " << s;
 
-    //ui->treeView->setRootIndex(data_model->index(s));
+    ui->treeView->setRootIndex(data_model->index(s));
 }
 
 void p_data::on_mkdir_clicked()
@@ -114,7 +137,6 @@ void p_data::on_del_clicked()
             QMessageBox::information(this,
                              tr("Remove"),
                              tr("Failed to remove %1").arg(data_model->fileName(index)));
-
         }
 }
 
@@ -141,7 +163,8 @@ void p_data::on_burner_setting_clicked()
     close->setStyleSheet("QPushButton{border-image: url(:/new/prefix1/pic/icon-关闭-默认.png);border:none;background-color:rgb(233, 233, 233);border-radius: 4px;}"
                                 "QPushButton:hover{border-image: url(:/new/prefix1/pic/icon-关闭-悬停点击.png);border:none;background-color:rgb(248, 100, 87);border-radius: 4px;}");
 
-    connect(close, SIGNAL(clicked(bool)), this, SLOT(setting_exit()));
+    connect(close, &QPushButton::clicked, this, &p_data::setting_exit);
+
     QHBoxLayout *titlebar = new QHBoxLayout();
     titlebar->addWidget(icon);
     titlebar->addSpacing(10);
@@ -196,8 +219,9 @@ void p_data::on_burner_setting_clicked()
     mainLayout->addLayout(hLayout);
     mainLayout->addSpacing(20);
 
-    connect(cancel, SIGNAL(clicked(bool)), this, SLOT(setting_exit()));
-    connect(ok, SIGNAL(clicked(bool)), this, SLOT(setting_ok()));
+    connect(cancel, &QPushButton::clicked, this, &p_data::setting_exit);
+    connect(ok, &QPushButton::clicked, this, &p_data::setting_ok);
+
     burn_setting->setModal(true);
     burn_setting->show();
     }else {

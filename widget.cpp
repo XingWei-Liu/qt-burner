@@ -21,7 +21,6 @@ Widget::Widget(QWidget *parent) :
     ui->setupUi(this);
     setWindowIcon(QIcon(":pic/logo.png"));
     this->setWindowTitle("Kylin-burner");
-
 }
 
 Widget::~Widget()
@@ -138,9 +137,9 @@ void Widget::create_ui()
     image_page = new p_image(this);
     copy_page = new p_copy(this);
 
-    connect(data_burner, SIGNAL(clicked(bool)), this, SLOT(on_data_burner_clicked()));
-    connect(image_burner, SIGNAL(clicked(bool)), this, SLOT(on_image_burner_clicked()));
-    connect(copy_image, SIGNAL(clicked(bool)), this, SLOT(on_copy_image_clicked()));
+    connect(data_burner, &QPushButton::clicked, this, &Widget::on_data_burner_clicked);
+    connect(image_burner, &QPushButton::clicked, this, &Widget::on_image_burner_clicked);
+    connect(copy_image, &QPushButton::clicked, this, &Widget::on_copy_image_clicked);
 
     tabWidget->addWidget(data_page);
     tabWidget->addWidget(image_page);

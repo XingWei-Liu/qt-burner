@@ -21,7 +21,7 @@ public:
     explicit p_image(QWidget *parent = nullptr);
     ~p_image();
     void create_ui();
-private slots:
+//private slots:
     void on_file_clicked();
 
     void on_burner_setting_clicked();
