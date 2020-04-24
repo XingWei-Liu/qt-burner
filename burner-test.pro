@@ -8,7 +8,6 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-INCLUDEPATH +=/usr/include/burner3/
 INCLUDEPATH +=/usr/include/glib-2.0/
 INCLUDEPATH +=/usr/include/gtk-3.0/
 INCLUDEPATH +=/usr/include/pango-1.0/
@@ -23,9 +22,9 @@ LIBS +=-lglib-2.0
 LIBS +=-pthread
 LIBS +=-lgthread-2.0
 
-LIBS +=$$PWD/so/libburner-burn3.so.1.2.0
-LIBS +=$$PWD/so/libburner-media3.so.1.2.0
-LIBS +=$$PWD/so/libburner-utils3.so.1.2.0
+LIBS +=$$PWD/kylin_so/libburner-burn3.so.1.2.0
+LIBS +=$$PWD/kylin_so/libburner-media3.so.1.2.0
+LIBS +=$$PWD/kylin_so/libburner-utils3.so.1.2.0
 
 TARGET = burner-test
 TEMPLATE = app
@@ -63,7 +62,39 @@ HEADERS += \
     p_copy.h \
     property.h \
     so/config.h \
-    kylin_api.h
+    kylin_api.h \
+    kylin_include/burner-blank-dialog.h \
+    kylin_include/burner-burn-dialog.h \
+    kylin_include/burner-burn-lib.h \
+    kylin_include/burner-burn-options.h \
+    kylin_include/burner-burn.h \
+    kylin_include/burner-drive-selection.h \
+    kylin_include/burner-drive.h \
+    kylin_include/burner-enums.h \
+    kylin_include/burner-error.h \
+    kylin_include/burner-media.h \
+    kylin_include/burner-medium-monitor.h \
+    kylin_include/burner-medium-selection.h \
+    kylin_include/burner-medium.h \
+    kylin_include/burner-session-cfg.h \
+    kylin_include/burner-session-span.h \
+    kylin_include/burner-session.h \
+    kylin_include/burner-status.h \
+    kylin_include/burner-sum-dialog.h \
+    kylin_include/burner-tags.h \
+    kylin_include/burner-tool-dialog.h \
+    kylin_include/burner-track-data-cfg.h \
+    kylin_include/burner-track-data.h \
+    kylin_include/burner-track-disc.h \
+    kylin_include/burner-track-image-cfg.h \
+    kylin_include/burner-track-image.h \
+    kylin_include/burner-track-stream-cfg.h \
+    kylin_include/burner-track-stream.h \
+    kylin_include/burner-track-type.h \
+    kylin_include/burner-track.h \
+    kylin_include/burner-units.h \
+    kylin_include/burner-volume.h \
+    kylin_include/config.h
 
 FORMS += \
         widget.ui \
@@ -80,8 +111,8 @@ RESOURCES += \
     res.qrc
 
 DISTFILES += \
-    so/libburner-burn3.so.1.2.0 \
-    so/libburner-media3.so.1.2.0 \
-    so/libburner-utils3.so.1.2.0
+    kylin_so/libburner-burn3.so.1.2.0 \
+    kylin_so/libburner-media3.so.1.2.0 \
+    kylin_so/libburner-utils3.so.1.2.0
 
 

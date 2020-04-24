@@ -1,22 +1,21 @@
 #ifndef KYLIN_API_H
 #define KYLIN_API_H
 
-#include "so/config.h"
+#include "kylin_include/config.h"
 
 #include <stdio.h>
 #include <string.h>
 #include <locale.h>
-
 #include <glib.h>
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 #include <gst/gst.h>
 
-#include <burner-drive.h>
-#include <burner-track-disc.h>
-#include <burner-media.h>
-#include <burner-medium-monitor.h>
-#include <burner-volume.h>
+#include "kylin_include/burner-drive.h"
+#include "kylin_include/burner-track-disc.h"
+#include "kylin_include/burner-media.h"
+#include "kylin_include/burner-medium-monitor.h"
+#include "kylin_include/burner-volume.h"
 
 #define KYLIN_MAXNUM_DEVICE 32
 

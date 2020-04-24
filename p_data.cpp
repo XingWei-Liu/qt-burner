@@ -72,6 +72,7 @@ void p_data::create_ui()
     ui->textBrowser->setMaximumSize(30,30);
 
     data_model = new QFileSystemModel;
+    data_model->setRootPath(QDir::currentPath());
     ui->treeView->setModel(data_model);
     ui->treeView->setColumnWidth(0,400);
 }

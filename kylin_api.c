@@ -39,8 +39,7 @@ int kylin_get_device_info(KylinDeviceInfo info[])
 
 void kylin_device_free(KylinDeviceInfo info[], int num)
 {
-    int i;
-    for(i=0; i<num; i++)
+    for(int i=0; i<num; i++)
     {
         if(info[i].drive_name)
             free(info[i].drive_name);
