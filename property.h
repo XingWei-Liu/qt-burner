@@ -5,6 +5,12 @@
 #include <QComboBox>
 #include <QCheckBox>
 #include <QLineEdit>
+#include <QDialog>
+#include <QWidget>
+#include <QLabel>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 class property
 {

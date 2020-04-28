@@ -6,8 +6,22 @@
 #include <QComboBox>
 #include <QCheckBox>
 #include <QStandardItem>
+#include <QDialog>
+#include <QList>
+#include <QFileDialog>
+#include <QLineEdit>
+#include <QDebug>
+#include <QStringList>
+#include <QStandardItem>
+#include <QInputDialog>
+#include <QMessageBox>
+#include <QCheckBox>
+#include <QDebug>
 
 #include "property.h"
+#include "burnerset.h"
+#include "burnclean.h"
+#include "burnmd5.h"
 
 namespace Ui {
 class p_data;
@@ -29,19 +43,14 @@ Q_SLOT  void on_del_clicked();
 Q_SLOT  void on_clean_clicked();
 Q_SLOT  void on_burner_setting_clicked();
 Q_SLOT  void on_start_burner_clicked();
-Q_SLOT  void setting_exit();
-Q_SLOT  void setting_ok();
 
 private:
     Ui::p_data *ui;
     class property pro;
+    BurnerSet *burn_setting;
+    BurnClean *clean_dialog;
+    BurnMd5 *check_dialog;
     QFileSystemModel *data_model;
-    QDialog *burn_setting;
-    QComboBox *speed;
-    QCheckBox *append;
-    QCheckBox *burn_proof;
-    QCheckBox *simulation;
-
     QList<QStandardItem *> items;
 };
 

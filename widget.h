@@ -23,7 +23,6 @@ public:
     ~Widget();
 
     void create_ui();
-
 //private slots:
 
     void on_data_burner_clicked();
@@ -32,12 +31,15 @@ public:
 
     void on_copy_image_clicked();
 
+protected:
+    virtual bool eventFilter(QObject *obj, QEvent *event);
+
 private:
     Ui::Widget *ui;
 
     QStackedWidget *tabWidget;
-    //QLabel *m_pIconLabel;
-    //QLabel *m_pTitleLabel;
+    QLabel *pIconLabel;
+    QLabel *pTitleLabel;
     QPushButton *data_burner;
     QPushButton *image_burner;
     QPushButton *copy_image;

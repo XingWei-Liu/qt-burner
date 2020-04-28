@@ -26,7 +26,9 @@ TitleBar::TitleBar(QWidget *parent)
     m_pCloseButton = new QPushButton(this);
 
     m_pIconLabel->setFixedSize(35,35);
-    m_pIconLabel->setStyleSheet("QLabel{background-image: url(:/new/prefix1/pic/logo.png);background-color:rgb(255,255,255);background-repeat: no-repeat;}");
+    m_pIconLabel->setStyleSheet("QLabel{background-image: url(:/new/prefix1/pic/logo.png);"
+                                "background-color:rgb(255,255,255);"
+                                "background-repeat: no-repeat;}");
 
     m_pTitleLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
@@ -35,7 +37,7 @@ TitleBar::TitleBar(QWidget *parent)
     m_pMaximizeButton->setFixedSize(30, 30);
     m_pCloseButton->setFixedSize(30, 30);
 
-    m_pTitleLabel->setObjectName("whiteLabel");
+//    m_pTitleLabel->setObjectName("whiteLabel");
     m_pMenubutton->setObjectName("menuButton");
     m_pMinimizeButton->setObjectName("minimizeButton");
     m_pMaximizeButton->setObjectName("maximizeButton");
@@ -49,22 +51,46 @@ TitleBar::TitleBar(QWidget *parent)
     m_pTitleLabel->setContentsMargins(8,0,0,0);
     m_pTitleLabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
+    m_pMenubutton->setStyleSheet("QToolButton{border-image: url(:/new/prefix1/pic/icon-设置-默认.png);"
+                                 "border:none;background-color:rgb(255, 255, 255);"
+                                 "border-radius: 4px;}"
+                                "QToolButton:hover{border-image: url(:/new/prefix1/pic/icon-设置-悬停点击.png);"
+                                 "border:none;background-color:rgb(61, 107, 229);"
+                                 "border-radius: 4px;}"
+                                "QToolButton:checked{border-image: url(:/new/prefix1/pic/icon-设置-悬停点击.png);"
+                                 "border:none;background-color:rgb(50, 87, 202);"
+                                 "border-radius: 4px;}"
+                                 "QToolButton::menu-indicator{image:none;}");
 
-    m_pMenubutton->setStyleSheet("QToolButton{border-image: url(:/new/prefix1/pic/icon-设置-默认.png);border:none;background-color:rgb(255, 255, 255);border-radius: 4px;}"
-                                "QToolButton:hover{border-image: url(:/new/prefix1/pic/icon-设置-悬停点击.png);border:none;background-color:rgb(61, 107, 229);border-radius: 4px;}"
-                                "QToolButton:checked{border-image: url(:/new/prefix1/pic/icon-设置-悬停点击.png);border:none;background-color:rgb(50, 87, 202);border-radius: 4px;}");
+    m_pMinimizeButton->setStyleSheet("QPushButton{border-image: url(:/new/prefix1/pic/icon-最小化-默认.png);"
+                                     "border:none;background-color:rgb(255, 255, 255);"
+                                     "border-radius: 4px;}"
+                                "QPushButton:hover{border-image: url(:/new/prefix1/pic/icon-最小化-悬停点击.png);"
+                                     "border:none;background-color:rgb(61, 107, 229);"
+                                     "border-radius: 4px;}"
+                                "QPushButton:checked{border-image: url(:/new/prefix1/pic/icon-最小化-悬停点击.png);"
+                                     "border:none;background-color:rgb(50, 87, 202);"
+                                     "border-radius: 4px;}");
 
-    m_pMinimizeButton->setStyleSheet("QPushButton{border-image: url(:/new/prefix1/pic/icon-最小化-默认.png);border:none;background-color:rgb(255, 255, 255);border-radius: 4px;}"
-                                "QPushButton:hover{border-image: url(:/new/prefix1/pic/icon-最小化-悬停点击.png);border:none;background-color:rgb(61, 107, 229);border-radius: 4px;}"
-                                "QPushButton:checked{border-image: url(:/new/prefix1/pic/icon-最小化-悬停点击.png);border:none;background-color:rgb(50, 87, 202);border-radius: 4px;}");
+    m_pMaximizeButton->setStyleSheet("QPushButton{border-image: url(:/new/prefix1/pic/icon-最大化-默认.png);"
+                                     "border:none;background-color:rgb(255, 255, 255);"
+                                     "border-radius: 4px;}"
+                                "QPushButton:hover{border-image: url(:/new/prefix1/pic/icon-最大化-悬停点击.png);"
+                                     "border:none;background-color:rgb(61, 107, 229);"
+                                     "border-radius: 4px;}"
+                                "QPushButton:checked{border-image: url(:/new/prefix1/pic/icon-最大化-悬停点击.png);"
+                                     "border:none;background-color:rgb(50, 87, 202);"
+                                     "border-radius: 4px;}");
 
-    m_pMaximizeButton->setStyleSheet("QPushButton{border-image: url(:/new/prefix1/pic/icon-最大化-默认.png);border:none;background-color:rgb(255, 255, 255);border-radius: 4px;}"
-                                "QPushButton:hover{border-image: url(:/new/prefix1/pic/icon-最大化-悬停点击.png);border:none;background-color:rgb(61, 107, 229);border-radius: 4px;}"
-                                "QPushButton:checked{border-image: url(:/new/prefix1/pic/icon-最大化-悬停点击.png);border:none;background-color:rgb(50, 87, 202);border-radius: 4px;}");
-
-    m_pCloseButton->setStyleSheet("QPushButton{border-image: url(:/new/prefix1/pic/icon-关闭-默认.png);border:none;background-color:rgb(255, 255, 255);border-radius: 4px;}"
-                                "QPushButton:hover{border-image: url(:/new/prefix1/pic/icon-关闭-悬停点击.png);border:none;background-color:rgb(248, 100, 87);border-radius: 4px;}"
-                                "QPushButton:checked{border-image: url(:/new/prefix1/pic/icon-关闭-悬停点击.png);border:none;background-color:rgb(228, 236, 80);border-radius: 4px;}");
+    m_pCloseButton->setStyleSheet("QPushButton{border-image: url(:/new/prefix1/pic/icon-关闭-默认.png);"
+                                  "border:none;background-color:rgb(255, 255, 255);"
+                                  "border-radius: 4px;}"
+                                "QPushButton:hover{border-image: url(:/new/prefix1/pic/icon-关闭-悬停点击.png);"
+                                  "border:none;background-color:rgb(248, 100, 87);"
+                                  "border-radius: 4px;}"
+                                "QPushButton:checked{border-image: url(:/new/prefix1/pic/icon-关闭-悬停点击.png);"
+                                  "border:none;background-color:rgb(228, 236, 80);"
+                                  "border-radius: 4px;}");
 
     QMenu *menu = new QMenu(this);  //新建菜单
 
@@ -93,8 +119,6 @@ TitleBar::TitleBar(QWidget *parent)
     pLayout->setContentsMargins(7,0,0,0);
     pLayout->setSpacing(0);
     mainWidget->setStyleSheet("QWidget{background-color:rgb(255,255,255);}");
-    pLayout->addWidget(m_pIconLabel);
-    pLayout->addWidget(m_pTitleLabel);
     pLayout->addStretch();
     pLayout->addWidget(m_pMenubutton);
     pLayout->addWidget(m_pMinimizeButton);
@@ -117,7 +141,7 @@ void TitleBar::mouseDoubleClickEvent(QMouseEvent *event)
 {
     Q_UNUSED(event);
 
-//    emit m_pMaximizeButton->clicked();
+    Q_EMIT m_pMaximizeButton->clicked();
 }
 
 void TitleBar::mouseMoveEvent(QMouseEvent *event)
@@ -147,40 +171,6 @@ void TitleBar::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-bool TitleBar::eventFilter(QObject *obj, QEvent *event)
-{
-    switch (event->type())
-    {
-    case QEvent::WindowTitleChange:
-    {
-        QWidget *pWidget = qobject_cast<QWidget *>(obj);
-        if (pWidget)
-        {
-            m_pTitleLabel->setText(pWidget->windowTitle());
-            return true;
-        }
-    }
-    case QEvent::WindowIconChange:
-    {
-        QWidget *pWidget = qobject_cast<QWidget *>(obj);
-        if (pWidget)
-        {
-            QIcon icon = pWidget->windowIcon();
-            m_pIconLabel->setPixmap(icon.pixmap(m_pIconLabel->size()));
-            return true;
-        }
-    }
-    case QEvent::WindowStateChange:
-    case QEvent::Resize:
-         updateMaximize();
-         return true;
-     default:
-         return QWidget::eventFilter(obj, event);
-
-     }
-     return QWidget::eventFilter(obj, event);
-}
-
 void TitleBar::onClicked()
 {
     QPushButton *pButton = qobject_cast<QPushButton *>(sender());
@@ -190,10 +180,12 @@ void TitleBar::onClicked()
         if (pButton == m_pMinimizeButton)
         {
             pWindow->showMinimized();
+            updateMaximize();
         }
         else if (pButton == m_pMaximizeButton)
         {
             pWindow->isMaximized() ? pWindow->showNormal() : pWindow->showMaximized();
+            updateMaximize();
         }
         else if (pButton == m_pCloseButton)
         {
@@ -229,167 +221,21 @@ void TitleBar::popup()
 }
 void TitleBar::clean()
 {
-    clean_dialog = new QDialog;
-    clean_dialog->setWindowFlags(Qt::FramelessWindowHint | windowFlags());
-    clean_dialog->setFixedSize(400, 400);
-
-    QLabel *icon = new QLabel();
-    icon->setFixedSize(35,35);
-    icon->setStyleSheet("QLabel{background-image: url(:/new/prefix1/pic/logo.png);background-color:rgb(233, 233, 233);background-repeat: no-repeat;}");
-    QLabel *title = new QLabel("kylin-burner");
-    title->setFixedSize(80,30);
-    title->setStyleSheet("QLabel{background-color:rgb(233, 233, 233);background-repeat: no-repeat;color:rgb(0, 0, 0);font: 14px;}");
-    QPushButton *close = new QPushButton();
-    close->setFixedSize(30,30);
-    close->setStyleSheet("QPushButton{border-image: url(:/new/prefix1/pic/icon-关闭-默认.png);border:none;background-color:rgb(233, 233, 233);border-radius: 4px;}"
-                                "QPushButton:hover{border-image: url(:/new/prefix1/pic/icon-关闭-悬停点击.png);border:none;background-color:rgb(248, 100, 87);border-radius: 4px;}");
-
-    connect(close, &QPushButton::clicked, this, &TitleBar::clean_exit);
-
-    QHBoxLayout *titlebar = new QHBoxLayout();
-    titlebar->addWidget(icon);
-    titlebar->addSpacing(10);
-    titlebar->addWidget(title);
-    titlebar->addStretch();
-    titlebar->addWidget(close);
-
-    QVBoxLayout *mainWidgetLayout = new QVBoxLayout(clean_dialog);
-    QLabel *clean_label = new QLabel("clean");
-    clean_label->setStyleSheet("QLabel{font: 24px ;color: #444444;}");
-    QLabel *clean_label1 = new QLabel("add clean CD");
-    clean_combo = new QComboBox();
-    QLabel *prompt = new QLabel("");
-
-    QHBoxLayout *hLayout = new QHBoxLayout();
-    QPushButton *cancel = new QPushButton("cancel");
-    QPushButton *ok = new QPushButton("ok");
-    hLayout->addWidget(cancel);
-    hLayout->addWidget(ok);
-
-    mainWidgetLayout->addLayout(titlebar);
-    mainWidgetLayout->addSpacing(10);
-    mainWidgetLayout->addWidget(clean_label);
-    mainWidgetLayout->addSpacing(20);
-    mainWidgetLayout->addWidget(clean_label1);
-    mainWidgetLayout->addWidget(clean_combo);
-    mainWidgetLayout->addWidget(prompt);
-    mainWidgetLayout->addStretch();
-    mainWidgetLayout->addLayout(hLayout);
-
-   connect(close, &QPushButton::clicked, this, &TitleBar::clean_exit);
-
+    clean_dialog =new BurnClean();
     clean_dialog->setModal(true);
-    clean_dialog->show();
+//    clean_dialog->show();
 }
 void TitleBar::md5()
 {
-    check_dialog = new QDialog;
-    check_dialog->setWindowFlags(Qt::FramelessWindowHint | windowFlags());
-    check_dialog->setFixedSize(400, 400);
-
-    QLabel *icon = new QLabel();
-    icon->setFixedSize(30,30);
-    icon->setStyleSheet("QLabel{background-image: url(:/new/prefix1/pic/logo.png);background-color:rgb(233, 233, 233);background-repeat: no-repeat;}");
-    QLabel *title = new QLabel("kylin-burner");
-    title->setFixedSize(80,30);
-    title->setStyleSheet("QLabel{background-color:rgb(233, 233, 233);background-repeat: no-repeat;color:rgb(0, 0, 0);font: 14px;}");
-    QPushButton *close = new QPushButton();
-    close->setFixedSize(30,30);
-    close->setStyleSheet("QPushButton{border-image: url(:/new/prefix1/pic/icon-关闭-默认.png);border:none;background-color:rgb(233, 233, 233);border-radius: 4px;}"
-                                "QPushButton:hover{border-image: url(:/new/prefix1/pic/icon-关闭-悬停点击.png);border:none;background-color:rgb(248, 100, 87);border-radius: 4px;}");
-    connect(close, &QPushButton::clicked, this, &TitleBar::check_exit);
-
-    QHBoxLayout *titlebar = new QHBoxLayout();
-    titlebar->addWidget(icon);
-    titlebar->addSpacing(10);
-    titlebar->addWidget(title);
-    titlebar->addStretch();
-    titlebar->addWidget(close);
-    QVBoxLayout *mainWidgetLayout = new QVBoxLayout(check_dialog);
-    QLabel *check_label = new QLabel("check MD5");
-    QLabel *check_label1 = new QLabel("choice check CD");
-    check_combo = new QComboBox();
-    md5_check = new QCheckBox();
-    md5_check->setText("Checking discs with MD5 files");
-    md5_file = new QLineEdit("");
-    md5_file->setMaximumSize(300,30);
-    QPushButton *choice = new QPushButton();
-    QHBoxLayout *hLayout1 = new QHBoxLayout(check_dialog);
-    hLayout1->addWidget(md5_file);
-    hLayout1->addWidget(choice);
-
-    QHBoxLayout *hLayout = new QHBoxLayout(check_dialog);
-    QPushButton *cancel = new QPushButton("cancel");
-    QPushButton *ok = new QPushButton("ok");
-    hLayout->addWidget(cancel);
-    hLayout->addWidget(ok);
-
-    mainWidgetLayout->addLayout(titlebar);
-    mainWidgetLayout->addWidget(check_label);
-    mainWidgetLayout->addSpacing(20);
-    mainWidgetLayout->addWidget(check_label1);
-    mainWidgetLayout->addWidget(check_combo);
-    mainWidgetLayout->addSpacing(20);
-    mainWidgetLayout->addWidget(md5_check);
-    mainWidgetLayout->addLayout(hLayout1);
-    mainWidgetLayout->addStretch();
-    mainWidgetLayout->addLayout(hLayout);
-
-    connect(ok, &QPushButton::clicked, this, &TitleBar::check_ok);
-    connect(cancel, &QPushButton::clicked, this, &TitleBar::check_exit);
-
+    check_dialog = new BurnMd5();
     check_dialog->setModal(true);
-    check_dialog->show();
+//    check_dialog->show();
 }
 void TitleBar::filter()
 {
-    filter_dialog = new QDialog();
-    filter_dialog->setWindowFlags(Qt::FramelessWindowHint | windowFlags());
-    filter_dialog->setFixedSize(400, 400);
-
-    QLabel *icon = new QLabel();
-    icon->setFixedSize(30,30);
-    icon->setStyleSheet("QLabel{background-image: url(:/new/prefix1/pic/logo.png);background-color:rgb(233, 233, 233);background-repeat: no-repeat;}");
-    QLabel *title = new QLabel("kylin-burner");
-    title->setFixedSize(80,30);
-    title->setStyleSheet("QLabel{background-color:rgb(233, 233, 233);background-repeat: no-repeat;color:rgb(0, 0, 0);font: 14px;}");
-    QPushButton *close = new QPushButton();
-    close->setFixedSize(30,30);
-    close->setStyleSheet("QPushButton{border-image: url(:/new/prefix1/pic/icon-关闭-默认.png);border:none;background-color:rgb(233, 233, 233);border-radius: 4px;}"
-                                "QPushButton:hover{border-image: url(:/new/prefix1/pic/icon-关闭-悬停点击.png);border:none;background-color:rgb(248, 100, 87);border-radius: 4px;}");
-    connect(close, &QPushButton::clicked, this, &TitleBar::filter_exit);
-
-    QHBoxLayout *titlebar = new QHBoxLayout();
-    titlebar->addWidget(icon);
-    titlebar->addSpacing(10);
-    titlebar->addWidget(title);
-    titlebar->addStretch();
-    titlebar->addWidget(close);
-    QVBoxLayout *mainWidgetLayout = new QVBoxLayout(filter_dialog);
-    QLabel *filter_label = new QLabel("filter");
-    filter_label->setFixedSize(80,30);
-    filter_label->setStyleSheet("QLabel{background-color:rgb(233, 233, 233);background-repeat: no-repeat;color:rgb(0, 0, 0);font: 24px;}");
-
-    hide_check = new QCheckBox();
-    hide_check->setText("Checking discs with MD5 files");
-    hide_check->setChecked(false);
-    link_check = new QCheckBox("link");
-    link_check->setChecked(false);
-    deform_link = new QCheckBox("deform link");
-    deform_link->setChecked(false);
-
-    mainWidgetLayout->addLayout(titlebar);
-    mainWidgetLayout->addWidget(filter_label);
-    mainWidgetLayout->addSpacing(50);
-    mainWidgetLayout->addWidget(hide_check);
-    mainWidgetLayout->addSpacing(20);
-    mainWidgetLayout->addWidget(link_check);
-    mainWidgetLayout->addSpacing(20);
-    mainWidgetLayout->addWidget(deform_link);
-    mainWidgetLayout->addStretch();
-
+    filter_dialog = new BurnFilter();
     filter_dialog->setModal(true);
-    filter_dialog->show();
+//    filter_dialog->show();
 
 }
 void TitleBar::help()
@@ -401,32 +247,3 @@ void TitleBar::about()
 
 }
 
-void TitleBar::clean_ok()
-{
-    pro.set_clean_disk(clean_combo->currentText());
-    clean_dialog->close();
-}
-void TitleBar::check_ok()
-{
-    pro.set_check_disk(check_combo->currentText());
-    pro.set_md5_check(md5_check->isChecked());
-    pro.set_md5_file(md5_file->text());
-    check_dialog->close();
-}
-
-void TitleBar::clean_exit()
-{
-    clean_dialog->close();
-}
-void TitleBar::check_exit()
-{
-    check_dialog->close();
-}
-void TitleBar::filter_exit()
-{
-    pro.set_filter_hide(hide_check->isChecked());
-    pro.set_filter_link(link_check->isChecked());
-    pro.set_filter_deform_link(deform_link->isChecked());
-
-    filter_dialog->close();
-}

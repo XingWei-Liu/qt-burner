@@ -2,14 +2,16 @@
 #define TITLE_BAR_H
 #include <QWidget>
 #include <QToolButton>
-#include <QLabel>
-#include <QPushButton>
-#include <QComboBox>
-#include <QCheckBox>
-#include <QLineEdit>
+//#include <QLabel>
+//#include <QPushButton>
+//#include <QComboBox>
+//#include <QCheckBox>
+//#include <QLineEdit>
 
 #include "property.h"
-
+#include "burnclean.h"
+#include "burnmd5.h"
+#include "burnfilter.h"
 
 class TitleBar : public QWidget
 {
@@ -29,23 +31,14 @@ protected:
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
 
-    // 设置界面标题与图标
-    virtual bool eventFilter(QObject *obj, QEvent *event);
-
-//private slots:
     // 进行最小化、最大化/还原、关闭操作
-    void onClicked();
-    void popup();
-    void clean();
-    void md5();
-    void filter();
-    void help();
-    void about();
-    void clean_exit();
-    void check_exit();
-    void filter_exit();
-    void clean_ok();
-    void check_ok();
+Q_SLOT    void onClicked();
+Q_SLOT    void popup();
+Q_SLOT    void clean();
+Q_SLOT    void md5();
+Q_SLOT    void filter();
+Q_SLOT    void help();
+Q_SLOT    void about();
 
 private:
     QPoint mLastMousePosition;
@@ -55,18 +48,10 @@ private:
 
 private:
     class property pro;
-    QComboBox *clean_combo;
-    QComboBox *check_combo;
-    QCheckBox *md5_check;
-    QLineEdit *md5_file;
+    BurnClean *clean_dialog;
+    BurnMd5 *check_dialog;
+    BurnFilter *filter_dialog;
 
-    QCheckBox *hide_check;
-    QCheckBox *link_check;
-    QCheckBox *deform_link;
-
-    QDialog *clean_dialog;
-    QDialog *check_dialog;
-    QDialog *filter_dialog;
     QLabel *m_pIconLabel;
     QLabel *m_pTitleLabel;
     QToolButton *m_pMenubutton;

@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QFileDialog>
 #include "property.h"
+#include "burnerset.h"
 
 namespace Ui {
 class p_image;
@@ -20,25 +21,19 @@ class p_image : public QWidget
 public:
     explicit p_image(QWidget *parent = nullptr);
     ~p_image();
-    void create_ui();
+
+
 //private slots:
-    void on_file_clicked();
+Q_SLOT    void on_file_clicked();
 
-    void on_burner_setting_clicked();
+Q_SLOT    void on_burner_setting_clicked();
 
-    void on_start_burner_clicked();
-
-    void setting_exit();
-    void setting_ok();
+Q_SLOT    void on_start_burner_clicked();
 
 private:
     Ui::p_image *ui;
     class property pro;
-    QDialog *burn_setting;
-    QComboBox *speed;
-    QCheckBox *append;
-    QCheckBox *burn_proof;
-    QCheckBox *simulation;
+    BurnerSet *burn_setting;
 };
 
 #endif // P_IMAGE_H

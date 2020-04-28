@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QFileDialog>
 #include "property.h"
+#include "burnerset.h"
 
 namespace Ui {
 class p_copy;
@@ -20,25 +21,23 @@ class p_copy : public QWidget
 public:
     explicit p_copy(QWidget *parent = nullptr);
     ~p_copy();
-    void create_ui();
+
 //private slots:
 
-    void on_file_clicked();
+Q_SLOT    void on_file_clicked();
 
-    void on_create_clicked();
+Q_SLOT    void on_create_clicked();
 
-    void on_burn_setting_clicked();
-    void setting_exit();
-    void setting_ok();
+Q_SLOT    void on_burn_setting_clicked();
+
+Q_SLOT    void on_radioButton_clicked();
+
+Q_SLOT    void on_radioButton_2_clicked();
 
 private:
     Ui::p_copy *ui;
     class property pro;
-    QDialog *burn_setting;
-    QComboBox *speed;
-    QCheckBox *append;
-    QCheckBox *burn_proof;
-    QCheckBox *simulation;
+    BurnerSet *burn_setting;
 
 };
 

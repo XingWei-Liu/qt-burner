@@ -16,15 +16,17 @@ INCLUDEPATH +=/usr/include/gdk-pixbuf-2.0/
 INCLUDEPATH +=/usr/include/atk-1.0/
 INCLUDEPATH +=/usr/include/gstreamer-1.0/
 INCLUDEPATH +=/usr/lib/x86_64-linux-gnu/glib-2.0/include
+#INCLUDEPATH +=/usr/include/kylin_include/
 
 LIBS +=-lgobject-2.0
 LIBS +=-lglib-2.0
 LIBS +=-pthread
 LIBS +=-lgthread-2.0
 
-LIBS +=$$PWD/kylin_so/libburner-burn3.so.1.2.0
-LIBS +=$$PWD/kylin_so/libburner-media3.so.1.2.0
-LIBS +=$$PWD/kylin_so/libburner-utils3.so.1.2.0
+#LIBS += -L/usr/lib/kylin_so/
+LIBS += -L $$PWD/kylin_so/libburner-burn3.so.1.2.0
+LIBS += -L $$PWD/kylin_so/libburner-media3.so.1.2.0
+LIBS += -L $$PWD/kylin_so/libburner-utils3.so.1.2.0
 
 TARGET = burner-test
 TEMPLATE = app
@@ -45,6 +47,10 @@ PKGCONFIG +=gtk+-3.0
 CONFIG += c++11 link_pkgconfig no_keywords
 
 SOURCES += \
+    burnclean.cpp \
+    burnerset.cpp \
+    burnfilter.cpp \
+    burnmd5.cpp \
         main.cpp \
         widget.cpp \
     title_bar.cpp \
@@ -55,6 +61,10 @@ SOURCES += \
     kylin_api.c
 
 HEADERS += \
+    burnclean.h \
+    burnerset.h \
+    burnfilter.h \
+    burnmd5.h \
         widget.h \
     title_bar.h \
     p_data.h \
@@ -97,6 +107,10 @@ HEADERS += \
     kylin_include/config.h
 
 FORMS += \
+    burnclean.ui \
+    burnerset.ui \
+    burnfilter.ui \
+    burnmd5.ui \
         widget.ui \
     p_data.ui \
     p_image.ui \
@@ -110,9 +124,28 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     res.qrc
 
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/kylin_so/release/ -lburner-media3
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/kylin_so/debug/ -lburner-media3
+else:unix: LIBS += -L$$PWD/kylin_so/ -lburner-media3
+
+INCLUDEPATH += $$PWD/kylin_so
+DEPENDPATH += $$PWD/kylin_so
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/kylin_so/release/ -lburner-utils3
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/kylin_so/debug/ -lburner-utils3
+else:unix: LIBS += -L$$PWD/kylin_so/ -lburner-utils3
+
+INCLUDEPATH += $$PWD/kylin_so
+DEPENDPATH += $$PWD/kylin_so
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/kylin_so/release/ -lburner-burn3
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/kylin_so/debug/ -lburner-burn3
+else:unix: LIBS += -L$$PWD/kylin_so/ -lburner-burn3
+
+INCLUDEPATH += $$PWD/kylin_so
+DEPENDPATH += $$PWD/kylin_so
+
+RC_FILE = ico.rc
+
 DISTFILES += \
-    kylin_so/libburner-burn3.so.1.2.0 \
-    kylin_so/libburner-media3.so.1.2.0 \
-    kylin_so/libburner-utils3.so.1.2.0
-
-
+    ico.rc

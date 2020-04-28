@@ -24,7 +24,7 @@
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>35</width>
+       <width>25</width>
        <height>20</height>
       </size>
      </property>
@@ -115,6 +115,18 @@
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QLineEdit" name="lineEdit">
+         <property name="minimumSize">
+          <size>
+           <width>360</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>360</width>
+           <height>30</height>
+          </size>
+         </property>
          <property name="baseSize">
           <size>
            <width>360</width>
@@ -141,6 +153,29 @@
        </item>
        <item>
         <widget class="QPushButton" name="file">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="baseSize">
+          <size>
+           <width>80</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{background-color:rgb(233, 233, 233);font: 14px;border-radius: 4px;}
+                           QPushButton:hover{background-color:rgb(107, 142, 235);font: 14px;border-radius: 4px;}
+                           QPushButton:pressed{border:none;background-color:rgb(65, 95, 196);font: 14px;border-radius: 4px;}</string>
+         </property>
          <property name="text">
           <string>find</string>
          </property>
@@ -232,6 +267,18 @@
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QComboBox" name="comboBox">
+         <property name="minimumSize">
+          <size>
+           <width>360</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>360</width>
+           <height>30</height>
+          </size>
+         </property>
          <property name="baseSize">
           <size>
            <width>360</width>
@@ -258,11 +305,28 @@
        </item>
        <item>
         <widget class="QPushButton" name="burner_setting">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>30</height>
+          </size>
+         </property>
          <property name="baseSize">
           <size>
            <width>80</width>
            <height>30</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{background-color:rgb(233, 233, 233);font: 14px;border-radius: 4px;}
+                           QPushButton:hover{background-color:rgb(107, 142, 235);font: 14px;border-radius: 4px;}
+                           QPushButton:pressed{border:none;background-color:rgb(65, 95, 196);font: 14px;border-radius: 4px;}</string>
          </property>
          <property name="text">
           <string>burner setting</string>
@@ -306,8 +370,31 @@
      </item>
      <item>
       <widget class="QPushButton" name="start_burner">
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="baseSize">
+        <size>
+         <width>140</width>
+         <height>45</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{background-color:rgb(61, 107, 229);font: 14px;border-radius: 4px;color: rgb(255,255,255);}
+                           QPushButton:hover{background-color:rgb(107, 142, 235);font: 14px;border-radius: 4px;color: rgb(255,255,255);}
+                           QPushButton:pressed{border:none;background-color:rgb(65, 95, 196);font: 14px;border-radius: 4px;color: rgb(255,255,255);}</string>
+       </property>
        <property name="text">
-        <string>PushButton</string>
+        <string>create iso</string>
        </property>
       </widget>
      </item>

@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QDebug>
+#include <QEvent>
 
 #include "widget.h"
 #include "ui_widget.h"
@@ -19,7 +20,7 @@ Widget::Widget(QWidget *parent) :
     create_ui();
 
     ui->setupUi(this);
-    setWindowIcon(QIcon(":pic/logo.png"));
+
     this->setWindowTitle("Kylin-burner");
 }
 
@@ -31,7 +32,7 @@ Widget::~Widget()
 void Widget::create_ui()
 {
     TitleBar *pTitleBar = new TitleBar(this);
-    installEventFilter(pTitleBar);
+    installEventFilter(this);
 
     QPalette pal(palette());
     pal.setColor(QPalette::Background, QColor(255, 255, 255));
@@ -40,95 +41,114 @@ void Widget::create_ui()
 
     tabWidget = new QStackedWidget(this);
 
-    /*QWidget *back = new QWidget(this);
-    //back->resize(600,125);
-    back->setAutoFillBackground(true);
-    back->setStyleSheet("QWidget{background-image: url(:/new/prefix1/pic/icon-侧边背景.png);background-position: center;border:none;background-repeat: no-repeat;}");*/
-
     QLabel *label = new QLabel();
-    label->setFixedSize(150, 600);
-    QPixmap bgImage("/home/test/qt-workspace/burner-test/pic/icon-侧边背景.png");
-    //label->setStyleSheet("QLabel{background-image: url(:/new/prefix1/pic/icon-侧边背景.png);background-position: center;border:none;background-repeat:repeat-xy;}");
-    label->setPixmap(bgImage);
+    label->setMinimumSize(125, 600);
+    label->setStyleSheet("QLabel{background-image: url(:/new/prefix1/pic/icon-侧边背景.png);"
+                         "background-position: top;"
+                         "border:none;"
+                         "background-repeat:repeat-xy;}");
     label->setScaledContents(true);
 
-    data_burner = new QPushButton(label);
+    pIconLabel = new QLabel(this);
+    pTitleLabel = new QLabel(this);
+    pIconLabel->setFixedSize(35,35);
+    pIconLabel->setStyleSheet("QLabel{background-image: url(:/new/prefix1/pic/logo.png);"
+                              "background-color:transparent;"
+                              "background-repeat: no-repeat;}");
+    pTitleLabel->setContentsMargins(0,0,0,0);
+    pTitleLabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    pTitleLabel->setObjectName("whiteLabel");
+    pTitleLabel->setMinimumSize(100,35);
+    pTitleLabel->setStyleSheet("QLabel{background-color:transparent;background-repeat: no-repeat;font: 12px;}");
+
+
+    data_burner = new QPushButton();
     data_burner->setText("data burner");
-    data_burner->setFixedSize(125, 50);
+    data_burner->setFixedSize(115, 50);
     data_burner->setStyleSheet("QPushButton{background-image: url(:/new/prefix1/pic/icon-数据刻录-默认.png);"
                                "background-color:rgba(87, 137, 217,0.2);"
                                "background-repeat: no-repeat;"
                                "background-position:left;"
-                               "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                               "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                            "QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-数据刻录-悬停点击.png);"
                                "background-color:rgba(87, 137, 217,0.15);"
                                "background-repeat: no-repeat;"
                                "background-position:left;"
-                               "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                               "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                            "QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-数据刻录-悬停点击.png);"
                                "background-color:rgba(87, 137, 217, 0.2);"
                                "background-repeat: no-repeat;"
                                "background-position:left;"
-                               "border:none;color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}");
+                               "border:none;color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}");
 
-    image_burner = new QPushButton(label);
+    image_burner = new QPushButton();
     image_burner->setText("image burner");
-    image_burner->setFixedSize(125, 50);
+    image_burner->setFixedSize(115, 50);
     image_burner->setStyleSheet("QPushButton{background-image: url(:/new/prefix1/pic/icon-镜像刻录-默认.png);"
                                 "background-color: transparent;"
                                 "background-repeat: no-repeat;"
                                 "background-position:left;"
-                                "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                                "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                            "QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-镜像刻录-悬停点击.png);"
                                 "background-color:rgba(87, 137, 217, 0.15);"
                                 "background-repeat: no-repeat;"
                                 "background-position:left;"
-                                "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                                "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                            "QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-镜像刻录-悬停点击.png);"
                                 "background-color:rgba(87, 137, 217, 0.2);"
                                 "background-repeat: no-repeat;"
                                 "background-position:left;"
                                 "border:none;"
                                 "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align: right;}");
-    copy_image = new QPushButton(label);
+    copy_image = new QPushButton();
     copy_image->setText("copy image");
-    copy_image->setFixedSize(125, 50);
+    copy_image->setFixedSize(115, 50);
     copy_image->setStyleSheet("QPushButton{background-image: url(:/new/prefix1/pic/icon-光盘复制-默认.png);"
                               "background-color:transparent;"
                               "background-repeat: no-repeat;"
                               "background-position:left;"
-                              "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                              "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                            "QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-光盘复制-悬停点击.png);"
                               "background-color:rgba(87, 137, 217, 0.15);"
                               "background-repeat: no-repeat;"
                               "background-position:left;"
-                              "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                              "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                            "QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-光盘复制-悬停点击.png);"
                               "background-color:rgba(87, 137, 217, 0.2);"
                               "background-repeat: no-repeat;"
                               "background-position:left;"
                               "border:none;"
-                              "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}");
+                              "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}");
 
-    QVBoxLayout *vLayout = new QVBoxLayout(label);
-    vLayout->addSpacing(0);
-    vLayout->addWidget(data_burner);
-    vLayout->addSpacing(20);
-    vLayout->addWidget(image_burner);
-    vLayout->addSpacing(20);
-    vLayout->addWidget(copy_image);
-    vLayout->addStretch();
+    QHBoxLayout *hLayout1 = new QHBoxLayout();
+    hLayout1->addSpacing(13);
+    hLayout1->addWidget(pIconLabel);
+    hLayout1->addSpacing(6);
+    hLayout1->addWidget(pTitleLabel);
 
-//    QVBoxLayout *v1Layout = new QVBoxLayout();
-//    v1Layout->addWidget(label);
+    QVBoxLayout *vLayout1 = new QVBoxLayout();
+    vLayout1->addSpacing(12);
+    vLayout1->addLayout(hLayout1);
+    vLayout1->addSpacing(46);
+    vLayout1->addWidget(data_burner);
+    vLayout1->addSpacing(20);
+    vLayout1->addWidget(image_burner);
+    vLayout1->addSpacing(20);
+    vLayout1->addWidget(copy_image);
+    vLayout1->addStretch();
 
-    QHBoxLayout *hLayout = new QHBoxLayout();
-    hLayout->addWidget(label);
-    hLayout->addWidget(tabWidget);
+    vLayout1->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
-    QVBoxLayout *pLayout = new QVBoxLayout();
-    pLayout->addWidget(pTitleBar);
-    pLayout->addLayout(hLayout);
+    label->setLayout(vLayout1);
+
+    QVBoxLayout *vLayout = new QVBoxLayout();
+    vLayout->addWidget(pTitleBar);
+    vLayout->addWidget(tabWidget);
+
+    QHBoxLayout *pLayout = new QHBoxLayout();
+    pLayout->setSpacing(0);
+    pLayout->addWidget(label);
+    pLayout->addLayout(vLayout);
     pLayout->setSpacing(0);
     pLayout->setMargin(0);
     setLayout(pLayout);
@@ -149,6 +169,38 @@ void Widget::create_ui()
     tabWidget->showFullScreen();
 }
 
+bool Widget::eventFilter(QObject *obj, QEvent *event)
+{
+    switch (event->type())
+    {
+    case QEvent::WindowTitleChange:
+    {
+        QWidget *pWidget = qobject_cast<QWidget *>(obj);
+        if (pWidget)
+        {
+            pTitleLabel->setText(pWidget->windowTitle());
+            return true;
+        }
+    }
+    case QEvent::WindowIconChange:
+    {
+        QWidget *pWidget = qobject_cast<QWidget *>(obj);
+        if (pWidget)
+        {
+            QIcon icon = pWidget->windowIcon();
+            pIconLabel->setPixmap(icon.pixmap(pIconLabel->size()));
+            return true;
+        }
+    }
+    case QEvent::WindowStateChange:
+
+    default:
+         return QWidget::eventFilter(obj, event);
+
+     }
+     return QWidget::eventFilter(obj, event);
+}
+
 void Widget::on_data_burner_clicked()
 {
     tabWidget->setCurrentWidget(data_page);
@@ -156,50 +208,50 @@ void Widget::on_data_burner_clicked()
                                "background-color:rgba(87, 137, 217, 0.2);"
                                "background-repeat: no-repeat;"
                                "background-position:left;"
-                               "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                               "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                                "QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-镜像刻录-悬停点击.png);"
                                     "background-color:rgba(87, 137, 217, 0.15);"
                                     "background-repeat: no-repeat;"
                                     "background-position:left;"
-                                    "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                                    "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                                "QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-镜像刻录-悬停点击.png);"
                                     "background-color:rgba(87, 137, 217, 0.2);"
                                     "background-repeat: no-repeat;"
                                     "background-position:left;"
                                     "border:none;"
-                                    "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}");
+                                    "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}");
     image_burner->setStyleSheet("QPushButton{background-image: url(:/new/prefix1/pic/icon-镜像刻录-默认.png);"
                                 "background-color:transparent;"
                                 "background-repeat: no-repeat;"
                                 "background-position:left;"
-                                "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                                "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                                 "QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-镜像刻录-悬停点击.png);"
                                      "background-color:rgba(87, 137, 217, 0.15);"
                                      "background-repeat: no-repeat;"
                                      "background-position:left;"
-                                     "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                                     "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                                 "QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-镜像刻录-悬停点击.png);"
                                      "background-color:rgba(87, 137, 217, 0.2);"
                                      "background-repeat: no-repeat;"
                                      "background-position:left;"
                                      "border:none;"
-                                     "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}");
+                                     "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}");
     copy_image->setStyleSheet("QPushButton{background-image: url(:/new/prefix1/pic/icon-光盘复制-默认.png);"
                               "background-color:transparent;"
                               "background-repeat: no-repeat;"
                               "background-position:left;"
-                              "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                              "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                               "QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-光盘复制-悬停点击.png);"
                                  "background-color:rgba(87, 137, 217, 0.15);"
                                  "background-repeat: no-repeat;"
                                  "background-position:left;"
-                                 "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                                 "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                               "QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-光盘复制-悬停点击.png);"
                                  "background-color:rgba(87, 137, 217, 0.2);"
                                  "background-repeat: no-repeat;"
                                  "background-position:left;"
                                  "border:none;"
-                                 "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}");
+                                 "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}");
 }
 
 void Widget::on_image_burner_clicked()
@@ -209,50 +261,50 @@ void Widget::on_image_burner_clicked()
                                "background-color:transparent;"
                                "background-repeat: no-repeat;"
                                "background-position:left;"
-                               "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                               "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                                "QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-镜像刻录-悬停点击.png);"
                                     "background-color:rgba(87, 137, 217, 0.15);"
                                     "background-repeat: no-repeat;"
                                     "background-position:left;"
-                                    "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                                    "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                                "QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-镜像刻录-悬停点击.png);"
                                     "background-color:rgba(87, 137, 217, 0.2);"
                                     "background-repeat: no-repeat;"
                                     "background-position:left;"
                                     "border:none;"
-                                    "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}");
+                                    "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}");
     image_burner->setStyleSheet("QPushButton{background-image: url(:/new/prefix1/pic/icon-镜像刻录-悬停点击.png);"
                                 "background-color:rgba(87, 137, 217, 0.2);"
                                 "background-repeat: no-repeat;"
                                 "background-position:left;"
-                                "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                                "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                                 "QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-镜像刻录-悬停点击.png);"
                                      "background-color:rgba(87, 137, 217, 0.15);"
                                      "background-repeat: no-repeat;"
                                      "background-position:left;"
-                                     "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                                     "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                                 "QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-镜像刻录-悬停点击.png);"
                                      "background-color:rgba(87, 137, 217, 0.2);"
                                      "background-repeat: no-repeat;"
                                      "background-position:left;"
                                      "border:none;"
-                                     "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}");
+                                     "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}");
     copy_image->setStyleSheet("QPushButton{background-image: url(:/new/prefix1/pic/icon-光盘复制-默认.png);"
                               "background-color:transparent;"
                               "background-repeat: no-repeat;"
                               "background-position:left;"
-                              "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                              "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                               "QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-光盘复制-悬停点击.png);"
                                  "background-color:rgba(87, 137, 217, 0.15);"
                                  "background-repeat: no-repeat;"
                                  "background-position:left;"
-                                 "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                                 "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                               "QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-光盘复制-悬停点击.png);"
                                  "background-color:rgba(87, 137, 217, 0.2);"
                                  "background-repeat: no-repeat;"
                                  "background-position:left;"
                                  "border:none;"
-                                 "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}");
+                                 "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}");
 }
 
 void Widget::on_copy_image_clicked()
@@ -262,48 +314,48 @@ void Widget::on_copy_image_clicked()
                                "background-color:transparent;"
                                "background-repeat: no-repeat;"
                                "background-position:left;"
-                               "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                               "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                                "QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-镜像刻录-悬停点击.png);"
                                     "background-color:rgba(87, 137, 217, 0.15);"
                                     "background-repeat: no-repeat;"
                                     "background-position:left;"
-                                    "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                                    "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                                "QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-镜像刻录-悬停点击.png);"
                                     "background-color:rgba(87, 137, 217, 0.2);"
                                     "background-repeat: no-repeat;"
                                     "background-position:left;"
                                     "border:none;"
-                                    "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}");
+                                    "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}");
     image_burner->setStyleSheet("QPushButton{background-image: url(:/new/prefix1/pic/icon-镜像刻录-默认.png);"
                                 "background-color:transparent;"
                                 "background-repeat: no-repeat;"
                                 "background-position:left;"
-                                "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                                "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                                 "QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-镜像刻录-悬停点击.png);"
                                      "background-color:rgba(87, 137, 217, 0.15);"
                                      "background-repeat: no-repeat;"
                                      "background-position:left;"
-                                     "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                                     "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                                 "QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-镜像刻录-悬停点击.png);"
                                      "background-color:rgba(87, 137, 217, 0.2);"
                                      "background-repeat: no-repeat;"
                                      "background-position:left;"
                                      "border:none;"
-                                     "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}");
+                                     "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}");
     copy_image->setStyleSheet("QPushButton{background-image: url(:/new/prefix1/pic/icon-光盘复制-悬停点击.png);"
                               "background-color:rgba(87, 137, 217, 0.2);"
                               "background-repeat: no-repeat;"
                               "background-position:left;"
-                              "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                              "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                               "QPushButton:hover{background-image: url(:/new/prefix1/pic/icon-光盘复制-悬停点击.png);"
                                  "background-color:rgba(87, 137, 217, 0.15);"
                                  "background-repeat: no-repeat;"
                                  "background-position:left;"
-                                 "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}"
+                                 "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}"
                               "QPushButton:pressed{background-image: url(:/new/prefix1/pic/icon-光盘复制-悬停点击.png);"
                                  "background-color:rgba(87, 137, 217, 0.2);"
                                  "background-repeat: no-repeat;"
                                  "background-position:left;"
                                  "border:none;"
-                                 "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;}");
+                                 "color:rgb(65, 127, 249);font: 14px;border-radius: 6px;text-align:right;}");
 }
